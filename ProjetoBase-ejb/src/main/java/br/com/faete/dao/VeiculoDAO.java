@@ -5,8 +5,7 @@
  */
 package br.com.faete.dao;
 
-import br.com.faete.dao.BaseDAO;
-import br.com.faete.modelos.Imovel;
+import br.com.faete.modelos.Veiculo;
 import javax.ejb.Stateless;
 
 /**
@@ -14,11 +13,11 @@ import javax.ejb.Stateless;
  * @author sticdev30
  */
 @Stateless
-public class ImovelDAO extends BaseDAO {
+public class VeiculoDAO extends BaseDAO {
 
     @Override
     public String getClassName() {
-        return Imovel.class.getSimpleName();
+        return Veiculo.class.getSimpleName();
     }
 
 }

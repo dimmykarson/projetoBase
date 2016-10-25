@@ -6,6 +6,7 @@
 package br.com.faete.modelos;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,13 +17,23 @@ import javax.persistence.Id;
  * @author sticdev30
  */
 @Entity
-public class Imovel implements Serializable {
+public class Veiculo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
+    @Column(nullable = false)
+    private String chassi;
+    private String placa;
+    private String modelo;
 
-    private String descricao;
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
 
     public Long getId() {
         return id;
@@ -32,12 +43,20 @@ public class Imovel implements Serializable {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getChassi() {
+        return chassi;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setChassi(String chassi) {
+        this.chassi = chassi;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
 }

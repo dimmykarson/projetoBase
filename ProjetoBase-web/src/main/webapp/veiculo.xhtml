@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="./templates/template.xhtml"
+    xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        <h2>Listagem de veículos</h2>
+
+        <h:form>
+            <p:growl showSummary="true" showDetail="true"
+                     sticky="true"/>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Chassi:" />
+                <p:inputText value="#{veiculoMB.veiculo.chassi}" />
+                <h:outputLabel value="Placa:" />
+                <p:inputText value="#{veiculoMB.veiculo.placa}" />
+                <h:outputLabel value="Modelo:" />
+                <p:inputText value="#{veiculoMB.veiculo.modelo}" />
+            </h:panelGrid>
+            <center>
+                <p:commandButton value="Salvar" 
+                                 action="#{veiculoMB.salvar()}"
+                                 process="@form"
+                                 update="@form"
+                                 />
+            </center>
+            <br/>
+            <p:dataTable value="#{veiculoMB.veiculos}" 
+                         paginator="true"
+                         paginatorPosition="bottom"
+                         rows="5"
+                         emptyMessage="Nenhum cadastro encontrado!"
+                         var="i">
+                <f:facet name="header">
+                    Veículos Cadastrados
+                </f:facet>
+                <p:column headerText="Chassi">
+                    #{i.chassi}                   
+                </p:column>
+                <p:column headerText="Modelo">
+                    #{i.modelo}                   
+                </p:column>
+                <p:column headerText="Ações">
+                    <p:commandButton icon="ui-icon-gear" 
+                                     process="@this"
+                                     update="@form">
+                        <f:setPropertyActionListener
+                            target="#{veiculoMB.veiculo}"
+                            value="#{i}"
+                            />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>
