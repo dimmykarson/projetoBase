@@ -6,6 +6,7 @@
 package br.com.faete.modelos;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,24 @@ public class Veiculo implements Serializable {
     private String chassi;
     private String placa;
     private String modelo;
+    private BigDecimal valorPorKM;
+    private BigDecimal valorPorDia;
+
+    public BigDecimal getValorPorKM() {
+        return valorPorKM;
+    }
+
+    public void setValorPorKM(BigDecimal valorPorKM) {
+        this.valorPorKM = valorPorKM;
+    }
+
+    public BigDecimal getValorPorDia() {
+        return valorPorDia;
+    }
+
+    public void setValorPorDia(BigDecimal valorPorDia) {
+        this.valorPorDia = valorPorDia;
+    }
 
     public String getModelo() {
         return modelo;

@@ -4,6 +4,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://primefaces.org/ui"
+    xmlns:x="http://xpert.com/faces"
     template="./templates/template.xhtml"
     xmlns:f="http://java.sun.com/jsf/core">
 
@@ -13,15 +14,21 @@
         <h:form>
             <p:growl showSummary="true" showDetail="true"
                      sticky="true"/>
+            <h:inputHidden value="#{veiculoMB.veiculo.id}"/>
             <h:panelGrid columns="2">
-                <h:outputLabel value="Chassi:" />
+                <h:outputLabel value="Chassi: " />
                 <p:inputText value="#{veiculoMB.veiculo.chassi}" />
-                <h:outputLabel value="Placa:" />
+                <h:outputLabel value="Placa: " />
                 <p:inputText value="#{veiculoMB.veiculo.placa}" />
-                <h:outputLabel value="Modelo:" />
+                <h:outputLabel value="Modelo: " />
                 <p:inputText value="#{veiculoMB.veiculo.modelo}" />
+                <h:outputLabel value="Valor Por KM: " />
+                <x:inputNumber value="#{veiculoMB.veiculo.valorPorKM}" />
+                <h:outputLabel value="Valor por Dia: " />
+                <x:inputNumber value="#{veiculoMB.veiculo.valorPorDia}" />
             </h:panelGrid>
             <center>
+                <p:button outcome="veiculo" value="Novo" />
                 <p:commandButton value="Salvar" 
                                  action="#{veiculoMB.salvar()}"
                                  process="@form"
@@ -38,6 +45,9 @@
                 <f:facet name="header">
                     Veículos Cadastrados
                 </f:facet>
+                <p:column>
+                    #{i.id}
+                </p:column>
                 <p:column headerText="Chassi">
                     #{i.chassi}                   
                 </p:column>
@@ -50,9 +60,13 @@
                                      update="@form">
                         <f:setPropertyActionListener
                             target="#{veiculoMB.veiculo}"
-                            value="#{i}"
-                            />
+                            value="#{i}"/>
                     </p:commandButton>
+                     <p:commandButton icon="ui-icon-plus" 
+                                     process="@this"
+                         update="@form"
+                         action="#{locacaoMB.adicionarVeiculo(i)}">
+                     </p:commandButton>
                 </p:column>
             </p:dataTable>
 

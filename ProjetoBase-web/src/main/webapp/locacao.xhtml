@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:x="http://xpert.com/faces"
+    template="./templates/template.xhtml"
+    xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        <h2>Locação de veículos</h2>
+
+        <h:form>
+            <p:growl showSummary="true" showDetail="true"
+                     sticky="true"/>
+
+            <p:dataTable value="#{locacaoMB.locacao.listVeiculos}" 
+                         paginator="true"
+                         paginatorPosition="bottom"
+                         rows="5"
+                         emptyMessage="Nenhum cadastro encontrado!"
+                         var="i">
+                <p:column>
+                    #{i.modelo}
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

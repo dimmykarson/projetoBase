@@ -7,6 +7,10 @@ package br.com.faete.bo;
 
 import br.com.faete.dao.VeiculoDAO;
 import br.com.faete.modelos.Veiculo;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -28,8 +32,20 @@ public class VeiculoBO {
             throw new Exception("Informe o chassi do veículo!");
         }
         if (veiculo.getId() == null) {
+            List lista = veiculoDAO.findByField("chassi", veiculo.getChassi());
+            if (lista != null && !lista.isEmpty()) {
+                throw new Exception("Já existe um veículo no banco com este Chassi!");
+            }
             veiculoDAO.salvar(veiculo);
-        }else{
+        } else {
+            List<Veiculo> lista = veiculoDAO.findByField("chassi", veiculo.getChassi());
+            if (lista != null && !lista.isEmpty()) {
+                for (Veiculo v : lista) {
+                    if (!Objects.equals(v.getId(), veiculo.getId())) {
+                        throw new Exception("Já existe um veículo no banco com este Chassi!");
+                    }
+                }
+            }
             veiculoDAO.atualizar(veiculo);
         }
     }

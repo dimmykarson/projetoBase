@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -21,23 +22,25 @@ import javax.faces.context.FacesContext;
  * @author sticdev30
  */
 @ManagedBean
+@RequestScoped
 public class VeiculoMB implements Serializable {
 
     private Veiculo veiculo = new Veiculo();
-    
+
     @EJB
     private VeiculoBO veiculoBO;
-    
-    public List<Veiculo> getVeiculos(){
+
+    public List<Veiculo> getVeiculos() {
         return veiculoBO.getVeiculoDAO().listarTodos();
     }
-    
-    public void salvar(){
+
+    public void salvar() {
         try {
             veiculoBO.salvar(veiculo);
             veiculo = new Veiculo();
             FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Sucesso", "Veículo Salvo com sucesso!"));
         } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", ex.getMessage()));
             Logger.getLogger(VeiculoMB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -49,9 +52,5 @@ public class VeiculoMB implements Serializable {
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
     }
-    
-    
-    
-    
-    
+
 }
