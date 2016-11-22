@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./templates/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="content">
+        <h:form prependId="false">
+            <p:inputText value="#{pessoaMB.nome}" />
+
+            <p:commandButton value="Pessoa" 
+                             process="@form"
+                             update="@form :detalhamento1"
+                             oncomplete="PF('pessoaDLG').show()"
+                             />
+        </h:form>
+        <p:dialog widgetVar="pessoaDLG" modal="true"
+                  width="500"
+                  height="400"
+                  header="Detalhamento">
+            <h:form id="detalhamento1">
+                <h:outputText value="#{pessoaMB.nome}" />
+                <p:commandButton value="Pessoa2" 
+                                 process="@form"
+                                 update="@form :detalhamento2"
+                                 oncomplete="PF('pessoaDLG2').show()"
+                                 />
+            </h:form>
+        </p:dialog>
+        <p:dialog widgetVar="pessoaDLG2" modal="true"
+                  width="500"
+                  height="400"
+                  header="Detalhamento 2">
+            <h:form id="detalhamento2">
+                <h:outputText value="#{pessoaMB.nome}" />
+            </h:form>
+        </p:dialog>
+    </ui:define>
+
+</ui:composition>
